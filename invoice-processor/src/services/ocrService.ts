@@ -1,5 +1,5 @@
-import { createWorker, Worker } from 'tesseract.js';
-import { ProcessingResult, InvoiceData } from '../types/invoice';
+import { createWorker, PSM } from 'tesseract.js';
+import type { Worker } from 'tesseract.js';
 
 export class OCRService {
   private worker: Worker | null = null;
@@ -19,7 +19,7 @@ export class OCRService {
       });
 
       await this.worker.setParameters({
-        tessedit_pageseg_mode: '6', // Uniform block of text
+        tessedit_pageseg_mode: PSM.SINGLE_BLOCK, // Uniform block of text
         tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$.,:-/&ÑÁÉÍÓÚáéíóúñü ',
       });
 
@@ -30,7 +30,7 @@ export class OCRService {
     }
   }
 
-  async processImage(imageData: string | File | ImageData): Promise<string> {
+  async processImage(imageData: string | File): Promise<string> {
     if (!this.worker) {
       await this.initialize();
     }

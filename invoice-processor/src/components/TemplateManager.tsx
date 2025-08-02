@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, Download, Upload } from 'lucide-react';
-import { Template } from '../types/invoice';
+import { Plus, Edit, Trash2, Download, Upload } from 'lucide-react';
+import type { Template } from '../types/invoice';
 import { useInvoiceStore } from '../store/useInvoiceStore';
 
 export const TemplateManager: React.FC = () => {
   const { templates, addTemplate, selectedTemplate, selectTemplate } = useInvoiceStore();
   const [isCreating, setIsCreating] = useState(false);
-  const [editingTemplate, setEditingTemplate] = useState<Template | null>(null);
   const [newTemplate, setNewTemplate] = useState<Partial<Template>>({
     name: '',
     providerRfc: '',
@@ -34,16 +33,10 @@ export const TemplateManager: React.FC = () => {
   };
 
   const handleEditTemplate = (template: Template) => {
-    setEditingTemplate({ ...template });
+    // TODO: Implement template editing functionality
+    console.log('Edit template:', template);
   };
 
-  const handleSaveEdit = () => {
-    if (!editingTemplate) return;
-    
-    // In a real app, you'd update the template in the store
-    // For now, we'll just close the edit mode
-    setEditingTemplate(null);
-  };
 
   const handleDeleteTemplate = (templateId: string) => {
     if (confirm('¿Estás seguro de que deseas eliminar esta plantilla?')) {
@@ -75,7 +68,7 @@ export const TemplateManager: React.FC = () => {
         template.id = `template-${Date.now()}`;
         template.createdAt = new Date();
         addTemplate(template);
-      } catch (error) {
+      } catch {
         alert('Error al importar la plantilla. Verifica que el archivo sea válido.');
       }
     };

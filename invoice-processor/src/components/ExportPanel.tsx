@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Download, FileSpreadsheet, FileText, Database, Code } from 'lucide-react';
 import { ExportService } from '../services/exportService';
-import { InvoiceData } from '../types/invoice';
+import type { InvoiceData } from '../types/invoice';
 
 interface ExportPanelProps {
   invoicesData: InvoiceData[];

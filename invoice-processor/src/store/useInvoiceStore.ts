@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { InvoiceData, Template, ProcessingResult } from '../types/invoice';
+import type { InvoiceData, Template, ProcessingResult } from '../types/invoice';
 
 interface InvoiceStore {
   files: File[];

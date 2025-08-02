@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Play, Square, Eye, FileText, AlertCircle, CheckCircle } from 'lucide-react';
+import { Play, Square, Eye, AlertCircle, CheckCircle } from 'lucide-react';
 import { useInvoiceStore } from '../store/useInvoiceStore';
 import { PDFExtractor } from '../services/pdfExtractor';
-import { getOCRService } from '../services/ocrService';
-import { ProcessingResult } from '../types/invoice';
+import type { ProcessingResult } from '../types/invoice';
 
 export const ProcessingPanel: React.FC = () => {
   const {
@@ -26,7 +25,7 @@ export const ProcessingPanel: React.FC = () => {
     
     try {
       // First try regular text extraction
-      let result = await extractor.extractFromFile(file);
+      const result = await extractor.extractFromFile(file);
       
       // If text extraction failed or confidence is low, try OCR
       if ((!result.success || result.confidence < 50) && useOCR) {

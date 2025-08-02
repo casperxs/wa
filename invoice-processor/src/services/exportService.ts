@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx';
 import Papa from 'papaparse';
-import { InvoiceData } from '../types/invoice';
+import type { InvoiceData } from '../types/invoice';
 
 export class ExportService {
   static exportToExcel(invoicesData: InvoiceData[], filename: string = 'facturas') {
@@ -43,8 +43,7 @@ export class ExportService {
     const csvData = this.prepareDataForExport(invoicesData);
     const csv = Papa.unparse(csvData, {
       delimiter: ',',
-      header: true,
-      encoding: 'utf-8'
+      header: true
     });
     
     this.downloadFile(
