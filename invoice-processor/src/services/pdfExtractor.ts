@@ -2,7 +2,10 @@ import * as pdfjs from 'pdfjs-dist';
 import type { InvoiceData, InvoiceField, InvoiceItem, ProcessingResult } from '../types/invoice';
 
 // Configure PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 export class PDFExtractor {
   private createEmptyField(id: string, label: string, required: boolean = true): InvoiceField {
