@@ -4,10 +4,7 @@ import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { useInvoiceStore } from '../store/useInvoiceStore';
 
 // Configure PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
 
 export const PDFViewer: React.FC = () => {
   const { currentFile } = useInvoiceStore();
